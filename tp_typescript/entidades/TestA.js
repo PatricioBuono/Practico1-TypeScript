@@ -1,0 +1,55 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Vehiculo_1 = require("./Vehiculo");
+var HojaRuta_1 = require("./HojaRuta");
+var Detalle_1 = require("./Detalle");
+var TestA = /** @class */ (function () {
+    function TestA() {
+    }
+    TestA.main = function () {
+        // Crear instancia de Vehiculo
+        var vehiculo = new Vehiculo_1.Vehiculo("ABC123", "Toyota", "Corolla");
+        vehiculo.patente = "ABC123";
+        vehiculo.marca = "Toyota";
+        vehiculo.modelo = "Corolla";
+        vehiculo.hojaRuta = [];
+        // Crear instancias de HojaRuta
+        var hojaRuta1 = new HojaRuta_1.HojaRuta(new Date(2024, 0, 1), 1);
+        var hojaRuta2 = new HojaRuta_1.HojaRuta(new Date(2024, 0, 2), 2);
+        var hojaRuta3 = new HojaRuta_1.HojaRuta(new Date(2024, 0, 3), 3);
+        // Asignar detalles a cada HojaRuta
+        hojaRuta1.detalle = [
+            new Detalle_1.Detalle(100, 150),
+            new Detalle_1.Detalle(150, 200),
+            new Detalle_1.Detalle(200, 250)
+        ];
+        hojaRuta2.detalle = [
+            new Detalle_1.Detalle(300, 350),
+            new Detalle_1.Detalle(350, 400),
+            new Detalle_1.Detalle(400, 450)
+        ];
+        hojaRuta3.detalle = [
+            new Detalle_1.Detalle(500, 550),
+            new Detalle_1.Detalle(550, 600),
+            new Detalle_1.Detalle(600, 650)
+        ];
+        // Agregar las hojas de ruta al vehículo
+        vehiculo.hojaRuta.push(hojaRuta1, hojaRuta2, hojaRuta3);
+        // Imprimir los detalles de cada hoja de ruta
+        console.log("Detalles de las Hojas de Ruta:");
+        vehiculo.hojaRuta.forEach(function (hojaRuta, index) {
+            console.log("\nHoja de Ruta ".concat(index + 1, " - Fecha: ").concat(hojaRuta.fecha));
+            hojaRuta.detalle.forEach(function (detalle, detalleIndex) {
+                console.log("  Detalle ".concat(detalleIndex + 1, " - Km Salida: ").concat(detalle.kmSalida, ", Km Regreso: ").concat(detalle.kmRegreso));
+            });
+        });
+        // Calcular y mostrar el total de kilómetros recorridos en un rango de fechas
+        var fechaDesde = new Date(2024, 0, 1);
+        var fechaHasta = new Date(2024, 0, 3);
+        var totalKilometros = vehiculo.calcularTotalKilometrosRecorridos(fechaDesde, fechaHasta);
+        console.log("\nTotal kil\u00F3metros recorridos entre ".concat(fechaDesde.toDateString(), " y ").concat(fechaHasta.toDateString(), ": ").concat(totalKilometros, " km"));
+    };
+    return TestA;
+}());
+// Ejecutar la prueba
+TestA.main();
